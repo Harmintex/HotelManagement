@@ -14,7 +14,6 @@ export class RegisterService {
 
   postRegisterUser(user: User){
     return this.http.post(this.baseURL + "register", user);
-
   }
 }
 

@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterService } from './register.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   validationErrorMessages = "";
 
-  constructor(private router: Router, private http: HttpClient, private registerService: RegisterService) { }
+  constructor(private router: Router, private http: HttpClient, private registerService: RegisterService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -48,11 +49,15 @@ export class RegisterComponent implements OnInit {
 
       this.registerService.postRegisterUser(user).subscribe(
         (res: any) => {
-          console.log(res);
           this.router.navigateByUrl('');
+          this.snackBar.open(res, "", {
+            duration: 3000,
+            panelClass: ['snackbar-success']});
         },
         (error) => {
-          console.error(error);
+          this.snackBar.open(error, "", {
+            duration: 3000,
+            panelClass: ['snackbar-error']});
         }
       );
     }

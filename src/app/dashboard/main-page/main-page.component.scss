@@ -21,6 +21,12 @@
     font-weight: bold;
   }
 
+  #logout-button{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10%;
+  }
+
   th{
     width: 300px;
   }
