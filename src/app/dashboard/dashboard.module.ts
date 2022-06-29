@@ -9,7 +9,7 @@ import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     MainPageComponent
-  ],
+   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
