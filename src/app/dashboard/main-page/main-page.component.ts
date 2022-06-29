@@ -7,7 +7,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 
-
 const bookingData: Booking[] = [
   {email: 'test@yahoo.com', phoneNumber: '1234567890', roomType: 'Single', periodTime: 4},
   {email: 'mda@yahoo.com', phoneNumber: '2010307090', roomType: 'Double', periodTime: 10}
@@ -53,6 +52,11 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
 

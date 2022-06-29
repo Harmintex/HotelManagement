@@ -5,6 +5,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { MatSortModule } from '@angular/material/sort';
     CommonModule,
     DashboardRoutingModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatInputModule,
+    MatCardModule
   ]
 })
 export class DashboardModule { }

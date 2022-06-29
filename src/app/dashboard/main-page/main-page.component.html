@@ -1,5 +1,11 @@
 
 <div class="main-page" >
+  <mat-card id="search-card">
+    <mat-form-field appearance="outline" id="search-field">
+        <mat-label>Search tool</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search tool">
+    </mat-form-field>
+</mat-card>
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
     class="mat-elevation-z8">
 
