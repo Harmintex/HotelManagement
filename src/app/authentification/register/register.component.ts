@@ -28,8 +28,12 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.validationErrorMessages = "";
-    this.validationErrorMessages += this.email?.errors?.['validationErrorMessage'];
-    this.validationErrorMessages += this.password?.errors?.['validationErrorMessage'];
+    if(this.email?.errors?.['validationErrorMessage']){
+      this.validationErrorMessages += this.email?.errors?.['validationErrorMessage'];
+    }
+    if(this.password?.errors?.['validationErrorMessage']){
+      this.validationErrorMessages += this.password?.errors?.['validationErrorMessage'];
+    }
   }
 
   get email(){
