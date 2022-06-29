@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -30,11 +32,21 @@ export class MainPageComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+    if(window.localStorage.getItem("rememberUserToken") === "false"){
+      window.localStorage.removeItem("rememberUserToken");
+    }
   }
 
+  logOut(){
+    window.localStorage.removeItem("rememberUserToken");
+    this.router.navigateByUrl('/authentification');
+    // this._snackBar.open('Log Out Successfully!', '', {
+    //   duration: 2000,
+    // });
+  }
 }
 
 //de implementat o functie pentru stergere
