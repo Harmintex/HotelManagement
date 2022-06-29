@@ -7,9 +7,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 
-const bookingData: Booking[] = [
-  {email: 'test@yahoo.com', phoneNumber: '1234567890', roomType: 'Single', periodTime: 4},
-  {email: 'mda@yahoo.com', phoneNumber: '2010307090', roomType: 'Double', periodTime: 10}
+let bookingData: Booking[] = [
+  {roomType : 'Single', noOfRooms : 2, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'),state : 'Not paid'},
+  {roomType : 'Double', noOfRooms : 3, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'}
 ];
 
 @Component({
@@ -21,7 +21,7 @@ const bookingData: Booking[] = [
 export class MainPageComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource(bookingData);
-  displayedColumns: string[] = ['email', 'phoneNumber', 'roomType', 'periodTime'];
+  displayedColumns: string[] = ['roomType', 'noOfRooms', 'checkIn', 'checkOut', 'state'];
   
   constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer) { }
 
