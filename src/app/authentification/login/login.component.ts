@@ -33,25 +33,16 @@ export class LoginComponent implements OnInit {
   }
 
   logIn() {
-    if (this.succesfulLogin === true) {
-      if(this.rememberChecked === true) {
-  
-      }
-      else {
-
-      }
-      console.log(this.rememberChecked);
-      this.router.navigate(['/dashboard/main-page'])
+      window.localStorage.setItem("rememberUserToken", this.rememberChecked.toString());
+      this.router.navigateByUrl('');
     }
-    
-  }
 
   get email(){
-    return this.logInForm.get('email');
+    return this.logInForm.get("email");
   }
 
   get password(){
-    return this.logInForm.get('password');
+    return this.logInForm.get("password");
   }
 
 }
