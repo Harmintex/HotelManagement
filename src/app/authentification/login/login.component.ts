@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,9 @@ import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/f
 })
 export class LoginComponent implements OnInit {
   logInForm!: FormGroup;
+  rememberChecked : boolean = false;
+  succesfulLogin : boolean = true;
+  currentUser : User = {email : '', username : '', password : ''};
 
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -24,7 +28,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  changeState() {
+    this.rememberChecked = !this.rememberChecked;
+  }
+
   logIn() {
+    if (this.succesfulLogin === true) {
+      if(this.rememberChecked === true) {
+  
+      }
+      else {
+
+      }
+      console.log(this.rememberChecked);
+      this.router.navigate(['/dashboard/main-page'])
+    }
+    
   }
 
   get email(){

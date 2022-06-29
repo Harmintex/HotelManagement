@@ -29,8 +29,8 @@
         autocomplete="on"
       />
     </mat-form-field>
-
     <a [routerLink]="'/register'">Don't have an account? Register now!</a>
+    <mat-checkbox color="primary" [checked]="rememberChecked" (change)="changeState()">Remember me</mat-checkbox>
     <button mat-raised-button color="primary" type="submit">LOG IN</button>
   </form>
 </div>
