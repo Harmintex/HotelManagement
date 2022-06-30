@@ -1,11 +1,12 @@
 export class Booking{
   constructor(
-  bookingId?: number,
-  userId?: number,
+  idBooking?: number,
+  idUser?: number,
   totalPrice?: number,
-  noOfRooms?: number,
-  checkIn?: Date,
-  checkOut?: Date,
-  status?: string,
+  totalRoomCount?: number,
+  bookingStartDate?: Date,
+  bookingEndDate?: Date,
+  bookingStatus?: string,
+  deleted?: boolean
   ){}
 }

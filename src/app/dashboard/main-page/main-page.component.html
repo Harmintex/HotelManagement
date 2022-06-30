@@ -14,24 +14,24 @@
           <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="noOfRooms">
+        <ng-container matColumnDef="totalRoomCount">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> No. of rooms </th>
-          <td mat-cell *matCellDef="let element"> {{element.noOfRooms}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.totalRoomCount}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="checkIn">
+        <ng-container matColumnDef="bookingStartDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Check in </th>
-          <td mat-cell *matCellDef="let element"> {{element.checkIn | date: "MMMM d, y"}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.bookingStartDate | date: "MMMM d, y"}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="checkOut">
+        <ng-container matColumnDef="bookingEndDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Check out </th>
-          <td mat-cell *matCellDef="let element"> {{element.checkOut | date: "MMMM d, y"}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.bookingEndDate | date: "MMMM d, y"}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> status</th>
-          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        <ng-container matColumnDef="bookingStatus">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.bookingStatus}} </td>
         </ng-container>
 
     <!-- <ng-container matColumnDef="actions">

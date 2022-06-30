@@ -2,7 +2,7 @@ import { TableService } from './table.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { Booking } from 'src/app/models/booking';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -20,9 +20,9 @@ import { AfterViewInit } from '@angular/core';
 
 export class MainPageComponent implements OnInit, AfterViewInit {
   bookingData!: Booking[];
-  userId!: number;
-  dataSource = new MatTableDataSource(this.bookingData);
-  displayedColumns: string[] = ['totalPrice', 'noOfRooms', 'checkIn', 'checkOut', 'status'];
+  userId!: string;
+  dataSource = new MatTableDataSource<Booking>(this.bookingData);
+  displayedColumns: string[] = ['totalPrice', 'totalRoomCount', 'bookingStartDate', 'bookingEndDate', 'bookingStatus'];
 
   constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer, private snackBar: MatSnackBar, private tableService: TableService) { }
 
@@ -32,14 +32,9 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     if(window.localStorage.getItem("rememberUserToken") === "false"){
       window.localStorage.removeItem("rememberUserToken");
     }
-    this.userId = Number(window.localStorage.getItem("userId"));
-  }
-
-  ngAfterViewInit(){
-    this.dataSource.sort = this.sort;
-    this.tableService.getBookingsByUserId(this.userId).subscribe(
-      (res: any) => {
-        this.bookingData = res;
+    this.tableService.getBookingsByUserId().subscribe(
+      (res: Booking[]) => {
+        this.dataSource.data = res;
       },
       (error) => {
         this.snackBar.open(error.error, "", {
@@ -48,6 +43,11 @@ export class MainPageComponent implements OnInit, AfterViewInit {
         console.error(error);
       }
     );
+
+  }
+
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort;
   }
 
   logOut(){

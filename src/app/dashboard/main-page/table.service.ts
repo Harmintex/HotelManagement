@@ -13,7 +13,7 @@ export class TableService {
 
   readonly baseURL = "https://localhost:44372/api/booking/"
 
-  getBookingsByUserId(userId: number){
-    return this.http.post(this.baseURL + "bookings", userId);
+  getBookingsByUserId(): Observable<Booking[]>{
+    return this.http.get(this.baseURL + "bookings/" + Number(window.localStorage.getItem("userId"))) as Observable<Booking[]>;
   }
 }
