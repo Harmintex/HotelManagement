@@ -10,7 +10,7 @@ export class LoginService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  readonly baseURL = "https://localhost:44372/api/User/"
+  readonly baseURL = "https://localhost:44372/api/user/"
 
   postLoginUser(user: User){
     return this.http.post(this.baseURL + "login", user);

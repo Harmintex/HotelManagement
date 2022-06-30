@@ -45,13 +45,14 @@ export class LoginComponent implements OnInit {
       this.loginService.postLoginUser(user).subscribe(
         (res: any) => {
           window.localStorage.setItem("rememberUserToken", this.rememberChecked.toString());
+          window.localStorage.setItem("userId", res.content);
           this.router.navigateByUrl('');
-          this.snackBar.open(res, "", {
+          this.snackBar.open(res.message, "", {
             duration: 3000,
             panelClass: ['snackbar-success']});
         },
         (error) => {
-          this.snackBar.open(error, "", {
+          this.snackBar.open(error.error, "", {
             duration: 3000,
             panelClass: ['snackbar-error']});
         }

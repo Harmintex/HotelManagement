@@ -1,3 +1,5 @@
+import { TableService } from './table.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { Booking } from 'src/app/models/booking';
 import { HttpClient } from '@angular/common/http';
@@ -7,10 +9,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 
-let bookingData: Booking[] = [
-  {roomType : 'Single', noOfRooms : 2, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'),state : 'Not paid'},
-  {roomType : 'Double', noOfRooms : 3, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'}
-];
+  // {roomType : 'Single', noOfRooms : 2, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'), state : 'Not paid'},
+  // {roomType : 'Double', noOfRooms : 3, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'}
 
 @Component({
   selector: 'app-main-page',
@@ -19,11 +19,12 @@ let bookingData: Booking[] = [
 })
 
 export class MainPageComponent implements OnInit, AfterViewInit {
+  bookingData!: Booking[];
+  userId!: number;
+  dataSource = new MatTableDataSource(this.bookingData);
+  displayedColumns: string[] = ['totalPrice', 'noOfRooms', 'checkIn', 'checkOut', 'status'];
 
-  dataSource = new MatTableDataSource(bookingData);
-  displayedColumns: string[] = ['roomType', 'noOfRooms', 'checkIn', 'checkOut', 'state'];
-  
-  constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer) { }
+  constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer, private snackBar: MatSnackBar, private tableService: TableService) { }
 
   @ViewChild(MatSort) sort! : MatSort
 
@@ -31,19 +32,31 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     if(window.localStorage.getItem("rememberUserToken") === "false"){
       window.localStorage.removeItem("rememberUserToken");
     }
+    this.userId = Number(window.localStorage.getItem("userId"));
   }
 
   ngAfterViewInit(){
     this.dataSource.sort = this.sort;
+    this.tableService.getBookingsByUserId(this.userId).subscribe(
+      (res: any) => {
+        this.bookingData = res;
+      },
+      (error) => {
+        this.snackBar.open(error.error, "", {
+          duration: 3000,
+          panelClass: ['snackbar-error']});
+        console.error(error);
+      }
+    );
   }
-
 
   logOut(){
     window.localStorage.removeItem("rememberUserToken");
+    window.localStorage.removeItem("userId");
     this.router.navigateByUrl('/authentification');
-    // this._snackBar.open('Log Out Successfully!', '', {
-    //   duration: 2000,
-    // });
+    this.snackBar.open('Log Out Successfully!', '', {
+      duration: 3000,
+    });
   }
 
   announceSortChange(sortState: Sort){

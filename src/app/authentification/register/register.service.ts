@@ -10,7 +10,7 @@ export class RegisterService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  readonly baseURL = "https://localhost:44372/api/User/"
+  readonly baseURL = "https://localhost:44372/api/user/"
 
   postRegisterUser(user: User){
     return this.http.post(this.baseURL + "register", user);

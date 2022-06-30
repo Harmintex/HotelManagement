@@ -1,9 +1,11 @@
-import { DatePipe } from "@angular/common";
-
-export interface Booking{
-    roomType : string;
-    noOfRooms : number;
-    checkIn : Date;
-    checkOut : Date;
-    state : string;
+export class Booking{
+  constructor(
+  bookingId?: number,
+  userId?: number,
+  totalPrice?: number,
+  noOfRooms?: number,
+  checkIn?: Date,
+  checkOut?: Date,
+  status?: string,
+  ){}
 }

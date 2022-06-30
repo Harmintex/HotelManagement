@@ -55,7 +55,8 @@ export class RegisterComponent implements OnInit {
             panelClass: ['snackbar-success']});
         },
         (error) => {
-          this.snackBar.open(error, "", {
+          console.error(error);
+          this.snackBar.open(error.error, "", {
             duration: 3000,
             panelClass: ['snackbar-error']});
         }
