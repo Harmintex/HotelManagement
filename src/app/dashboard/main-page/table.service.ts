@@ -16,4 +16,8 @@ export class TableService {
   getBookingsByUserId(): Observable<Booking[]>{
     return this.http.get(this.baseURL + "bookings/" + Number(window.localStorage.getItem("userId"))) as Observable<Booking[]>;
   }
+
+  deleteBooking(bookingId: Number){
+    return this.http.delete(this.baseURL + "delete/" + bookingId);
+  }
 }

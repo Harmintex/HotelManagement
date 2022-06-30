@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   bookingData!: Booking[];
   userId!: string;
   dataSource = new MatTableDataSource<Booking>(this.bookingData);
-  displayedColumns: string[] = ['totalPrice', 'totalRoomCount', 'bookingStartDate', 'bookingEndDate', 'bookingStatus'];
+  displayedColumns: string[] = ['totalPrice', 'totalRoomCount', 'bookingStartDate', 'bookingEndDate', 'bookingStatus', 'actions'];
 
   constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer, private snackBar: MatSnackBar, private tableService: TableService) { }
 
@@ -74,6 +74,11 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     let idItem = this.dataSource.data.indexOf(item);
     this.dataSource.data.splice(idItem, 1);
     this.dataSource._updateChangeSubscription();
+    this.tableService.deleteBooking(item.idBooking!).subscribe(
+    () =>{},
+    (error) =>{
+      console.error(error);
+      });
   }
 }
 
