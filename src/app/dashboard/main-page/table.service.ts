@@ -20,4 +20,8 @@ export class TableService {
   deleteBooking(bookingId: Number){
     return this.http.delete(this.baseURL + "delete/" + bookingId);
   }
+
+  addBooking(booking: Booking){
+    return this.http.post(this.baseURL + "add/", booking);
+  }
 }

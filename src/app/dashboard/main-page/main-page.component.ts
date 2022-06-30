@@ -8,6 +8,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBookingComponent } from '../add-booking/add-booking.component';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Booking>(this.bookingData);
   displayedColumns: string[] = ['totalPrice', 'totalRoomCount', 'bookingStartDate', 'bookingEndDate', 'bookingStatus', 'actions'];
 
-  constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer, private snackBar: MatSnackBar, private tableService: TableService) { }
+  constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer, private snackBar: MatSnackBar, private tableService: TableService,
+    private dialog: MatDialog) { }
 
   @ViewChild(MatSort) sort! : MatSort
 
@@ -77,8 +80,15 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.tableService.deleteBooking(item.idBooking!).subscribe(
     () =>{},
     (error) =>{
-      console.error(error);
+      this.snackBar.open(error.error, '' ,
+      {
+        duration: 3000
       });
+    });
+  }
+
+  openAddBookingModal() {
+    this.dialog.open(AddBookingComponent);
   }
 }
 

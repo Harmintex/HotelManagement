@@ -1,0 +1,29 @@
+<div id="add-booking-modal">
+  <h1 id="header" mat-dialog-title>Add booking</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="addBookingForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Number of rooms</mat-label>
+        <input type="number" matInput formControlName="totalRoomCount" />
+      </mat-form-field>
+      <mat-date-range-input>
+        <input
+          matStartDate
+          placeholder="Start date"
+          formControlName="bookingStartDate"
+        />
+        <input
+          matEndDate
+          placeholder="End date"
+          formControlname="bookingEndDate"
+        />
+      </mat-date-range-input>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="addBooking()">
+      Add Booking
+    </button>
+  </div>
+</div>
