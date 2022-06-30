@@ -8,8 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 
 let bookingData: Booking[] = [
-  {roomType : 'Single', noOfRooms : 2, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'),state : 'Not paid'},
-  {roomType : 'Double', noOfRooms : 3, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'}
+  {roomType : 'Single', noOfRooms : 3, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'),state : 'Not paid'},
+  {roomType : 'Double', noOfRooms : 1, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'},
+  {roomType : 'Triple', noOfRooms : 2, checkIn : new Date('2021-01-26'), checkOut : new Date('2021-02-15'), state : 'Paid'},
+  {roomType : 'Twin', noOfRooms : 4, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Not paid'}
 ];
 
 @Component({
@@ -21,7 +23,7 @@ let bookingData: Booking[] = [
 export class MainPageComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource(bookingData);
-  displayedColumns: string[] = ['roomType', 'noOfRooms', 'checkIn', 'checkOut', 'state'];
+  displayedColumns: string[] = ['roomType', 'noOfRooms', 'checkIn', 'checkOut', 'state', 'actions'];
   
   constructor(private router: Router, private http: HttpClient, private _liveAnnouncer : LiveAnnouncer) { }
 
@@ -58,7 +60,12 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  deleteEntry(item : Booking){
+    let idItem = this.dataSource.data.indexOf(item);
+    this.dataSource.data.splice(idItem, 1);
+    this.dataSource._updateChangeSubscription();
+  }
 }
 
-//de implementat o functie pentru stergere
 
