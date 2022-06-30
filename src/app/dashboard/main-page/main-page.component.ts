@@ -9,8 +9,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 
-  // {roomType : 'Single', noOfRooms : 2, checkIn : new Date('2020-12-20'), checkOut : new Date('2020-12-29'), state : 'Not paid'},
-  // {roomType : 'Double', noOfRooms : 3, checkIn : new Date('2020-12-26'), checkOut : new Date('2021-01-15'), state : 'Paid'}
 
 @Component({
   selector: 'app-main-page',
@@ -71,7 +69,12 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  deleteEntry(item : Booking){
+    let idItem = this.dataSource.data.indexOf(item);
+    this.dataSource.data.splice(idItem, 1);
+    this.dataSource._updateChangeSubscription();
+  }
 }
 
-//de implementat o functie pentru stergere
 
